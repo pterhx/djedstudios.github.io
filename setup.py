@@ -1,5 +1,6 @@
-from fabric.api import local, lcd
-from fabric.context_managers import hide
+# from fabric.api import local, lcd
+# from fabric.context_managers import hide
+import subprocess
 from urllib import urlretrieve
 import sys
 import os
@@ -12,6 +13,7 @@ class InstallManager(object):
     vagrant_url = 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.1.dmg'
     pgadmin_url = 'http://ftp.postgresql.org/pub/pgadmin3/release/v1.18.1/osx/pgadmin3-1.18.1.dmg'
     hipchat_url = 'https://www.hipchat.com/downloads/latest/mac'
+    sourcetree_url = 'http://www.sourcetreeapp.com/download'
 
     def _url_status(self, *args):
         if args[0] % 250 == 0:
@@ -27,20 +29,20 @@ class InstallManager(object):
 
     def _open_dmg(self, fn):
         print "** opening {}".format(fn)
-        local('open {}'.format(fn))
+        subprocess.call('open %s' % fn, shell=True)
         time.sleep(10)
 
     def _umount_dmg(self, path):
         print "** unmounting %s" % path
-        local('diskutil unmount %s' % path)
+        subprocess.call('diskutil unmount %s' % path, shell=True)
 
     def _install_pkg(self, fn):
         print "** installing {}".format(fn)
-        local('sudo installer -package {} -target /'.format(fn))
+        subprocess.call('sudo installer -package %s -target /' % fn, shell=True)
 
     def _brew_install(self, pkg):
         try:
-            local('brew install %s' % pkg)
+            subprocess.call('brew install %s' % pkg, shell=True)
         except:
             pass
 
@@ -51,9 +53,12 @@ class InstallManager(object):
         fn = url.split('/')[-1]
 
         if 'name' in kwargs:
-            res = local('which %s' % kwargs['name'], capture=True)
-            if not res == '':
-                return
+            try:
+                res = subprocess.call('which %s' % kwargs['name'], shell=True)
+                if not res == '':
+                    return
+            except:
+                pass
 
         self._dl_file(url, fn)
         self._open_dmg(fn)
@@ -63,10 +68,15 @@ class InstallManager(object):
     def _dl_dmg_app_flow(self, *args, **kwargs):
         url = kwargs['url']
         fn = url.split('/')[-1]
+        dmg = fn
+
         if not kwargs['volume'] == None:
             vol = os.path.join('/Volumes', kwargs['volume'])
         else:
             vol = '.'
+
+        if 'dmg' in kwargs:
+            dmg = kwargs['dmg']
 
         app = kwargs['app']
 
@@ -116,7 +126,7 @@ class InstallManager(object):
     def install_homebrew(self):
         print "\n\nInstalling Homebrew..."
         try:
-            local('ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"')
+            subprocess.call('ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"', shell=True)
         except:
             pass
 
@@ -130,7 +140,7 @@ class InstallManager(object):
 
     def install_grunt_cli(self):
         print '\n\nInstalling Grunt...'
-        local('sudo npm install -g grunt-cli')
+        subprocess.call('sudo npm install -g grunt-cli', shell=True)
 
     def install_pgadmin(self):
         print '\n\nInstalling PGAdmin III...'
@@ -148,46 +158,49 @@ class InstallManager(object):
             url=url,
             volume=None,
             app='HipChat.app',
+            dmg='SourceTree_1.8.1.dmg',
         )
 
-    def generate_pk(self):
-        dotssh = os.path.expanduser('~/.ssh/')
-        files = ('id_dsa', 'id_rsa')
-        pk_exists = False
-        for f in files:
-            if os.path.isfile(os.path.join(dotssh, f)):
-                pk_exists = True
-                break
-
-        if not pk_exists:
-            print '\n\nCreating a private key for you.'
-            local('ssh-keygen -t dsa')
+    def install_sourcetree(self):
+        print '\n\nInstalling SourceTree'
+        url = self.sourcetree_url
+        self._dl_dmg_app_flow(
+            url=url,
+            volume='SourceTree',
+            app='SourceTree.app',
+        )
 
     def __init__(self, *args, **kwargs):
-        self.generate_pk()
-        self.install_homebrew()
-        self.install_git()
-        self.install_virtualbox()
-        self.install_pycharm()
-        self.install_vagrant()
-        self.install_node()
-        self.install_grunt_cli()
-        self.install_pgadmin()
-        self.install_hipchat()
-
+        if 'apps' in kwargs:
+            apps = kwargs['apps']
+            for app in apps:
+                getattr(self, app)()
+        else:
+            raise ValueError('No Apps Suggested')
 
 if __name__ == '__main__':
     print "Welcome to Djed Studios. We'll begin installing your system now."
-    with hide('running', 'stdout', 'stderr'):
-        InstallManager()
+    InstallManager(
+        apps=[
+            'homebrew',
+            'git',
+            'virtualbox',
+            'pycharm',
+            'vagrant',
+            'node',
+            'grunt_cli',
+            'pgadmin',
+            'hipchat',
+            'sourcetree',
+        ]
+    )
 
     print """
         Thanks for using the Djed Studios workstation setup.
 
-        Your workstation is now configured. You might find it helpful to copy
-        your ssh key to your pasteboard, so as to add it to github.
-
-        $ pbcopy < ~/.ssh/id_dsa.pub
+        Your workstation is now configured.
 
         Thanks!
+
+
     """
