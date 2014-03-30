@@ -40,3 +40,5 @@ nosetests.xml
 *.tgz
 *.tar.gz
 *.gz
+
+*.idea/
