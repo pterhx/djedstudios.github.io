@@ -174,7 +174,7 @@ class InstallManager(object):
         if 'apps' in kwargs:
             apps = kwargs['apps']
             for app in apps:
-                getattr(self, app)()
+                getattr(self, 'install_%s' % app)()
         else:
             raise ValueError('No Apps Suggested')
 
