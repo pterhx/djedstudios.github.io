@@ -7,7 +7,6 @@ xcode-select --install
 java -version
 
 echo "Installing Homebrew..."
-#curl -fsSL https://raw.githubusercontent.com/DjedStudios/getting-started/master/setup.py | python
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 echo "Installing Cask..."
