@@ -1,18 +1,23 @@
 #!/bin/bash
 
-export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+xcode-select --print-path
+RETVAL=$?
+if [ $RETVAL -ne 0 ]; then
+    echo " * Setting up Developer Tools CLI..."
+    xcode-select --install
+fi
 
-echo "Setting up Developer Tools CLI..."
-xcode-select --install
 java -version
 
-echo "Installing Homebrew..."
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+if [ ! -e /usr/local/bin/brew ]; then
+    echo " * Installing Homebrew..."
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+fi
 
-echo "Installing Cask..."
+echo " * Installing Cask..."
 brew install phinze/cask/brew-cask
 
-echo "Installing apps..."
+echo " * Installing apps..."
 brew cask install pycharm
 brew cask install hipchat
 brew cask install virtualbox
