@@ -25,6 +25,7 @@ brew cask install vagrant
 brew cask install pgadmin3
 brew cask install github
 brew cask install sourcetree
+brew cask install iterm2
 brew install tmux
 brew install node
 
