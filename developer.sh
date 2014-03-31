@@ -27,4 +27,7 @@ brew cask install github
 brew cask install sourcetree
 brew install tmux
 brew install node
-sudo npm install -g grunt-cli
+
+if [ ! -e '/usr/local/bin/grunt' ]; then
+    sudo npm install -g grunt-cli
+fi
