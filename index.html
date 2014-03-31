@@ -34,9 +34,7 @@
 <a name="welcome-to-djed-studios" class="anchor" href="#welcome-to-djed-studios"><span class="octicon octicon-link"></span></a>Welcome to Djed Studios.</h3>
 
 <p>Get started installing all of your tools by opening your terminal and running:</p>
-
-<pre><code>$ curl -fsSL https://raw.github.com/DjedStudios/getting-started/master/developer.sh | bash
-</code></pre>
+<pre style='clear:both;text-align:center;margin:0 -3em;margin-bottom:0.9em'><code id='selectable' onclick="selectText(this)">curl -fsSL https://raw.github.com/DjedStudios/getting-started/master/developer.sh | bash</code></pre>
 
 <p>Checkout your project's source and get to work!</p>
 
@@ -50,6 +48,21 @@
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+<script type="text/javascript">
+function selectText(elem) {
+    if (document.selection) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(elem);
+        range.select();
+    } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(elem);
+        window.getSelection().addRange(range);
+    }
+}
+</script>
+
+
 		
   </body>
 </html>
