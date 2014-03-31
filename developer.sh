@@ -3,7 +3,7 @@
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 
 echo "Setting up Developer Tools CLI..."
-sudo xcode-select --install
+xcode-select --install
 java -version
 
 echo "Installing Homebrew..."
