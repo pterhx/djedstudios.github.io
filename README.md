@@ -8,12 +8,12 @@ Run any of the following commands in your terminal:
 * For developers:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/DjedStudios/DjedStudios.github.io/master/developer.sh | bash
+curl -fsSL https://djedstudios.github.io/developer.sh | bash
 ```
 
 * For designers:
 
 ```
-curl -fsSL https://raw.githubusercontent.com/DjedStudios/DjedStudios.github.io/master/designer.sh | bash
+curl -fsSL https://djedstudios.github.io/designer.sh | bash
 ```
 
