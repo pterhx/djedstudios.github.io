@@ -3,8 +3,17 @@ Getting Started
 
 This software installs some basic software you'll need to do your job.
 
-If you're a developer, run this command in your terminal:
+Run any of the following commands in your terminal:
+
+* For developers:
 
 ```
 curl -fsSL https://raw.github.com/DjedStudios/getting-started/master/developer.sh | bash
 ```
+
+* For designers:
+
+```
+curl -fsSL https://raw.github.com/DjedStudios/getting-started/master/designer.sh | bash
+```
+
