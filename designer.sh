@@ -18,19 +18,13 @@ echo " * Installing Cask..."
 brew install phinze/cask/brew-cask
 
 echo " * Installing apps..."
-brew cask install pycharm
-brew cask install hipchat
-brew cask install virtualbox
-brew cask install vagrant
-brew cask install pgadmin3
 brew cask install github
 brew cask install sourcetree
-brew cask install iterm2
+brew install node
 brew cask install sublime-text
 brew cask install google-chrome
 brew cask install firefox
-brew install tmux
-brew install node
+brew cask install sketch
 
 if [ ! -e '/usr/local/bin/grunt' ]; then
     sudo npm install -g grunt-cli
