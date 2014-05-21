@@ -17,20 +17,50 @@ fi
 echo " * Installing Cask..."
 brew install phinze/cask/brew-cask
 
+APPS_DIR="${HOME}/Applications"
+
 echo " * Installing apps..."
-brew cask install pycharm
-brew cask install hipchat
+if [ ! -e "${APPS_DIR}/PyCharm.app" ]; then
+    brew cask install pycharm
+fi
+
+if [ ! -e "${APPS_DIR}/HipChat.app" ]; then
+    brew cask install hipchat
+fi
+
 brew cask install virtualbox
 brew cask install vagrant
-brew cask install pgadmin3
-brew cask install github
-brew cask install sourcetree
-brew cask install iterm2
-brew cask install sublime-text
-brew cask install google-chrome
+
+if [ ! -e "${APPS_DIR}/pgAdmin3.app" ]; then
+    brew cask install pgadmin3
+fi
+
+if [ ! -e "${APPS_DIR}/GitHub.app" ]; then
+    brew cask install github
+fi
+
+if [ ! -e "${APPS_DIR}/SourceTree.app" ]; then
+    brew cask install sourcetree
+fi
+
+if [ ! -e "${APPS_DIR}/iTerm.app" ]; then
+    brew cask install iterm2
+fi
+
+if [ ! -e "${APPS_DIR}/Sublime Text 2.app" ]; then
+    brew cask install sublime-text
+fi
+
+if [ ! -e "${APPS_DIR}/Google Chrome.app" ]; then
+    brew cask install google-chrome
+fi
+
 brew cask install firefox
+
 brew install tmux
+
 brew install node
+
 brew install boot2docker
 
 if [ ! -e '/usr/local/bin/grunt' ]; then
