@@ -55,12 +55,12 @@ if [ ! -e "${APPS_DIR}/Google Chrome.app" ]; then
     brew cask install google-chrome
 fi
 
-brew cask install firefox
+if [ ! -e "${APPS_DIR}/Firefox.app" ]; then
+    brew cask install firefox
+fi
 
 brew install tmux
-
 brew install node
-
 brew install boot2docker
 
 if [ ! -e '/usr/local/bin/grunt' ]; then
