@@ -64,9 +64,17 @@ if [ ! -e "${APPS_DIR}/Firefox.app" ]; then
     brew cask install firefox
 fi
 
-brew install tmux
-brew install node
-brew install boot2docker
+if [ ! -e "/usr/local/bin/tmux" ]; then
+    brew install tmux
+fi
+
+if [ ! -e "/usr/local/bin/node" ]; then
+    brew install node
+fi
+
+if [ ! -e "/usr/local/bin/docker" ]; then
+    brew install boot2docker
+fi
 
 if [ ! -e '/usr/local/bin/grunt' ]; then
     sudo npm install -g grunt-cli
