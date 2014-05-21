@@ -80,4 +80,6 @@ if [ ! -e '/usr/local/bin/grunt' ]; then
     sudo npm install -g grunt-cli
 fi
 
-echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
+if [ `grep -c DOCKER_HOST ~/.bashrc` -eq 0 ]; then
+    echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
+fi
