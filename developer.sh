@@ -31,7 +31,10 @@ brew cask install google-chrome
 brew cask install firefox
 brew install tmux
 brew install node
+brew install boot2docker
 
 if [ ! -e '/usr/local/bin/grunt' ]; then
     sudo npm install -g grunt-cli
 fi
+
+echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
