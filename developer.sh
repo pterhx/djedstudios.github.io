@@ -14,8 +14,10 @@ if [ ! -e /usr/local/bin/brew ]; then
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
 
-echo " * Installing Cask..."
-brew install phinze/cask/brew-cask
+if [ ! -e "/usr/local/opt/brew-cask" ]; then
+    echo " * Installing Cask..."
+    brew install phinze/cask/brew-cask
+fi
 
 APPS_DIR="${HOME}/Applications"
 
