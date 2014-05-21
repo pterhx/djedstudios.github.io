@@ -28,8 +28,13 @@ if [ ! -e "${APPS_DIR}/HipChat.app" ]; then
     brew cask install hipchat
 fi
 
-brew cask install virtualbox
-brew cask install vagrant
+if [ ! -e "/usr/bin/VBoxManage" ]; then
+    brew cask install virtualbox
+fi
+
+if [ ! -e "/usr/bin/vagrant" ]; then
+    brew cask install vagrant
+fi
 
 if [ ! -e "${APPS_DIR}/pgAdmin3.app" ]; then
     brew cask install pgadmin3
