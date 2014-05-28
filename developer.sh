@@ -85,5 +85,5 @@ fi
 touch ~/.bashrc
 
 if [ `grep -c DOCKER_HOST ~/.bashrc` -eq 0 ]; then
-    echo "export DOCKER_HOST=tcp://localhost:4243" >> ~/.bashrc
+    echo 'export DOCKER_HOST="tcp://10.1.2.4:4243"' >> ~/.bashrc
 fi
