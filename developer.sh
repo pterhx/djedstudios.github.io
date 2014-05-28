@@ -19,6 +19,9 @@ if [ ! -e "/usr/local/opt/brew-cask" ]; then
     brew install phinze/cask/brew-cask
 fi
 
+brew update
+brew cask update
+
 APPS_DIR="${HOME}/Applications"
 
 echo " * Installing apps..."
@@ -34,9 +37,7 @@ if [ ! -e "/usr/bin/VBoxManage" ]; then
     brew cask install virtualbox
 fi
 
-if [ ! -e "/usr/bin/vagrant" ]; then
-    brew cask install vagrant
-fi
+brew cask install vagrant
 
 if [ ! -e "${APPS_DIR}/pgAdmin3.app" ]; then
     brew cask install pgadmin3
