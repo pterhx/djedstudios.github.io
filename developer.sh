@@ -84,6 +84,7 @@ if [ ! -e '/usr/local/bin/grunt' ]; then
 fi
 
 touch ~/.bashrc
+touch ~/.bash_profile
 
 if [ `grep -c DOCKER_HOST ~/.bash_profile` -eq 0 ]; then
     echo 'export DOCKER_HOST="tcp://10.1.2.4:4243"' >> ~/.bash_profile
