@@ -27,5 +27,5 @@ brew cask install firefox
 brew cask install sketch
 
 if [ ! -e '/usr/local/bin/grunt' ]; then
-    sudo npm install -g grunt-cli
+    npm install -g grunt-cli
 fi
